@@ -2,9 +2,18 @@
   "name": "rollup-vue",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/rollup-vue.cjs.js",
+  "module": "dist/rollup-vue.esm.js",
+  "unpkg": "dist/rollup-vue.js",
+  "jsdelivr": "dist/rollup-vue.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/secrets-pro/rollup-vue.git"
+  },
+  "homepage": "https://github.com/secrets-pro/rollup-vue",
   "scripts": {
-    "build": "rollup --config rollup.config.js"
+    "build": "rollup --config rollup.config.js",
+    "release": "npm publish --access public"
   },
   "keywords": [
     "rollup",
@@ -12,17 +21,24 @@
   ],
   "author": "xubowen",
   "license": "MIT",
-  "dependencies": {
-    "rollup": "^0.64.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
-    "rollup-plugin-babel": "^3.0.7",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-vue": "^4.3.2",
+    "eslint": "^7.3.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "rollup": "^1.27.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-less": "^1.1.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svgo": "^1.1.0",
+    "rollup-plugin-uglify-es": "^0.0.1",
+    "rollup-plugin-vue": "^5.1.2",
     "vue-template-compiler": "^2.5.17"
   }
 }

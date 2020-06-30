@@ -1,50 +1,33 @@
-import resolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
-import vueplugin from 'rollup-plugin-vue'
-let version = '1.0.0'
-let configCjs = {
-  input: 'src/main.js',
-  output: {
-    file: 'dist/index.cjs.js',
-    format: 'cjs',
-    globals: {
-      vue: 'Vue'
+import vueplugin from "rollup-plugin-vue";
+import resolve from "rollup-plugin-node-resolve";
+import babel from "rollup-plugin-babel";
+import uglify from "rollup-plugin-uglify-es";
+const json = require("./package.json");
+const { name, version } = json;
+let baseconfig = (format) => {
+  return {
+    input: "./src/index.js",
+    output: {
+      name,
+      globals: {
+        vue: "Vue"
+      },
+      extend: true,
+      format,
+      // sourceMap: true,
+      file: format === "iife" ? `dist/${name}.js` : `dist/${name}.${format}.js`,
+      banner: "/* library version " + version + " */",
+      footer: "/* @author xubowen */"
     },
-    sourcemap: true
-  },
-  plugins: [
-    vueplugin(),
-    resolve(),
-    babel({
-      exclude: 'node_modules/**' // 只编译我们的源代码
-    })
-  ],
-  banner: '/* library version ' + version + ' */',
-  footer: '/* @author xubowen */',
-  //外部模块
-  external: ['vue']
-}
-let configUmd = {
-  input: 'src/main.js',
-  output: {
-    file: 'dist/index.js',
-    format: 'iife',
-    name: 'mybunlde',
-    globals: {
-      vue: 'Vue'
-    },
-    sourcemap: true
-  },
-  plugins: [
-    vueplugin(),
-    resolve(),
-    babel({
-      exclude: 'node_modules/**' // 只编译我们的源代码
-    })
-  ],
-  banner: '/* library version ' + version + ' */',
-  footer: '/* @author xubowen */',
-  //外部模块
-  external: ['vue']
-}
-export default [configCjs, configUmd]
+    external: ["vue"],
+    plugins: [
+      resolve(),
+      babel({
+        exclude: "node_modules/**" // 只编译我们的源代码
+      }),
+      vueplugin({ css: true }),
+      uglify()
+    ]
+  };
+};
+export default [baseconfig("esm"), baseconfig("cjs"), baseconfig("iife")];
