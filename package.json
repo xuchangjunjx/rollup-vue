@@ -8,9 +8,9 @@
   "jsdelivr": "dist/rollup-vue.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/secrets-pro/rollup-vue.git"
+    "url": "git+https://github.com/xuchangjunjx/rollup-vue.git"
   },
-  "homepage": "https://github.com/secrets-pro/rollup-vue",
+  "homepage": "https://github.com/xuchangjunjx/rollup-vue",
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "release": "npm publish --access public"
